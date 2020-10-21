@@ -20,7 +20,10 @@ namespace HLNews.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            ResultsController results = new ResultsController();
+
+            var articles = results.Get();
+            return View(articles);
         }
 
         public IActionResult Privacy()
