@@ -51,7 +51,7 @@ namespace HLNews.Controllers
                     ArticleModel newArticle = new ArticleModel
                     {
                         
-                        Title = article.Title,
+                        title = article.Title,
                         description = article.Description,
                         author = article.Author,
                         url = article.Url,

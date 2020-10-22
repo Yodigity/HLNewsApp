@@ -7,10 +7,11 @@ namespace HLNews.Models
 {
     public class ArticleModel
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
+        public string sourceId { get; set; }
+        public string title { get; set; }
         public string description { get; set; }
         public string url { get; set; }
+        public string imageURL { get; set; }
         public string author { get; set; }
         public DateTime publishedAt { get; set; }
     }
