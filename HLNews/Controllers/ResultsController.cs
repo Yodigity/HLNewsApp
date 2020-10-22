@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using HLNews.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using NewsAPI;
 using NewsAPI.Constants;
 using NewsAPI.Models;
@@ -17,11 +19,18 @@ namespace HLNews.Controllers
     public class ResultsController : ControllerBase
     {
 
-        
+        private readonly IConfiguration _config;
+
+        public ResultsController(IConfiguration config)
+        {
+            _config = config;
+        }
+
         // GET: api/<ResultsController>
         [HttpGet]
         public List<ArticleModel> Get()
         {
+            NewsApiClient newsApiClient = new NewsApiClient(_config.GetValue<string>("NewsApiKey"));
             List<ArticleModel> articles = new List<ArticleModel>();
             var articlesResponse = newsApiClient.GetTopHeadlines(new TopHeadlinesRequest
             {
@@ -34,7 +43,7 @@ namespace HLNews.Controllers
             {
                 // total results found
                 var data = articlesResponse.TotalResults;
-                Console.WriteLine();
+            
                 // here's the first 20
                 foreach (var article in articlesResponse.Articles)
                 {
@@ -63,7 +72,7 @@ namespace HLNews.Controllers
                 }
             }
             return articles;
-            //return new string[] { "value1", "value2" };
+
         }
 
         // GET api/<ResultsController>/5
