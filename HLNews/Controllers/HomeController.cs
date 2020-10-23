@@ -23,13 +23,23 @@ namespace HLNews.Controllers
             _config = config;
         }
 
-        public IActionResult Index()
+        /* public IActionResult Index()
+         {
+
+             //ResultsController results = new ResultsController(_config);
+
+             NewsEndpoint newsEndpoint = new NewsEndpoint();
+             var articles = newsEndpoint.Get();
+             return View(articles);
+         }*/
+
+        public IActionResult Index(String searchString)
         {
 
             //ResultsController results = new ResultsController(_config);
 
             NewsEndpoint newsEndpoint = new NewsEndpoint();
-            var articles = newsEndpoint.Get();
+            var articles = newsEndpoint.Get(searchString);
             return View(articles);
         }
 

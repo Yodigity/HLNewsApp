@@ -20,13 +20,13 @@ namespace HLNewsLibrary.API
 
         
         List<ArticleModel> articles = new List<ArticleModel>();
-        public List<ArticleModel> Get()
+        public List<ArticleModel> Get(String searchString= "Apple")
         {
             NewsApiClient newsApiClient = new NewsApiClient(HLNewsLibrary.Properties.Resources.NewsAPIKey);
             List<ArticleModel> articles = new List<ArticleModel>();
             var articlesResponse = newsApiClient.GetTopHeadlines(new TopHeadlinesRequest
             {
-                Q = "Apple",
+                Q = searchString,
 
                 Language = Languages.EN,
 
