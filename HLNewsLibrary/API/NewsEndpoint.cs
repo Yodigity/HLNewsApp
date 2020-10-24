@@ -36,25 +36,45 @@ namespace HLNewsLibrary.API
                 // total results found
                 var data = articlesResponse.TotalResults;
 
-                // here's the first 20
-                foreach (var article in articlesResponse.Articles)
+                if (articlesResponse.Articles.Count > 0)
                 {
+                    // here's the first 20
+                    foreach (var article in articlesResponse.Articles)
+                    {
 
+                        ArticleModel newArticle = new ArticleModel
+                        {
+                            sourceId = article.Source.Id,
+                            title = article.Title,
+                            description = article.Description,
+                            author = article.Author,
+                            url = article.Url,
+                            imageURL = article.UrlToImage,
+                            publishedAt = (DateTime)article.PublishedAt
+                        };
+
+                        articles.Add(newArticle);
+
+                    }
+                    
+                }
+                else
+                {
                     ArticleModel newArticle = new ArticleModel
                     {
-                        sourceId = article.Source.Id,
-                        title = article.Title,
-                        description = article.Description,
-                        author = article.Author,
-                        url = article.Url,
-                        imageURL = article.UrlToImage,
-                        publishedAt = (DateTime)article.PublishedAt
-                    };
+                        sourceId = "No Data Available",
+                        title = "No Data Available",
+                        description = "No Data Available",
+                        author = "No Data Available",
+                        url = "No Data Available",
+                       
 
+                    };
                     articles.Add(newArticle);
-                  
                 }
+
             }
+           
             return articles;
 
         }
