@@ -16,9 +16,9 @@
         <input type="submit" value="Search" />
         Language: 
         <select type="text" name="language">
-           @foreach(string language in ViewData["Languages"] as List<string>)
+           @foreach(string country in ViewData["Countries"] as List<string>)
            {
-               <option value="@language">@language</option>
+               <option value="@country">@country</option>
            }
         </select>
         <input type="submit" value="Search" />
