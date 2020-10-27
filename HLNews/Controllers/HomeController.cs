@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using HLNewsLibrary.API;
 using Microsoft.Extensions.Configuration;
 using HLNews.Models;
+using HLNews.Helpers;
 
 namespace HLNews.Controllers
 {
@@ -33,18 +34,14 @@ namespace HLNews.Controllers
              return View(articles);
          }*/
 
-        public IActionResult Index(String searchString)
+        public IActionResult Index(String searchString, string country)
         {
-            List<string> languageList = new List<string>{"ae", "ar", "at", "au", "be", "bg", "br", "ca", "ch", "cn",
-             "co", "cu", "cz", "de", "eg", "fr", "gb", "gr", "hk", "hu", "id", "ie", "il",
-             "in", "it", "jp", "kr", "lt", "lv", "ma", "mx", "my", "ng",
-             "nl", "no", "nz", "ph", "pl", "pt", "ro", "rs", "ru", "sa", "se", "sg", "si", "sk", "th", "tr", "tw",
-             "ua", "us", "ve", "za" };
+            List<string> countryList = CountryList.countryDisplayList();
             //ResultsController results = new ResultsController(_config);
 
-            ViewData["Languages"] = languageList;
+            ViewData["Countries"] = countryList;
             NewsEndpoint newsEndpoint = new NewsEndpoint();
-            var articles = newsEndpoint.Get(searchString);
+            var articles = newsEndpoint.Get(searchString, country);
             return View(articles);
         }
 
