@@ -9,13 +9,13 @@ using System.Text;
 
 namespace HLNewsLibrary.API
 {
-    public class NewsEndpoint
+    public class NewsEndpoint : INewsEndpoint
     {
-        
+
 
         public NewsEndpoint()
         {
-          
+
         }
 
 
@@ -25,7 +25,7 @@ namespace HLNewsLibrary.API
             {
                 case "ae":
                     return Countries.AE;
-                    
+
                 case "ar":
                     return Countries.AR;
                 case "at":
@@ -46,7 +46,7 @@ namespace HLNewsLibrary.API
                     return Countries.CN;
                 case "co":
                     return Countries.CO;
-        
+
                 case "cu":
                     return Countries.CU;
                 case "cz":
@@ -142,7 +142,7 @@ namespace HLNewsLibrary.API
             }
         }
 
-        public List<ArticleModel> Get(String searchString= "Apple", String country = "us")
+        public List<ArticleModel> Get(String searchString = "Apple", String country = "us")
         {
             NewsApiClient newsApiClient = new NewsApiClient(HLNewsLibrary.Properties.Resources.NewsAPIKey);
             List<ArticleModel> articles = new List<ArticleModel>();
@@ -179,7 +179,7 @@ namespace HLNewsLibrary.API
                         articles.Add(newArticle);
 
                     }
-                    
+
                 }
                 else
                 {
@@ -190,14 +190,14 @@ namespace HLNewsLibrary.API
                         description = "No Data Available",
                         author = "No Data Available",
                         url = "No Data Available",
-                       
+
 
                     };
                     articles.Add(newArticle);
                 }
 
             }
-           
+
             return articles;
 
         }
