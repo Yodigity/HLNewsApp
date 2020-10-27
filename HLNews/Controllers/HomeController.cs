@@ -17,11 +17,14 @@ namespace HLNews.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _config;
+        private readonly INewsEndpoint _newsEndpoint;
 
-        public HomeController(ILogger<HomeController> logger, IConfiguration config)
+        public HomeController(ILogger<HomeController> logger, IConfiguration config, INewsEndpoint newsEndpoint)
         {
             _logger = logger;
             _config = config;
+            _newsEndpoint = newsEndpoint;
+            
         }
 
         /* public IActionResult Index()
@@ -40,8 +43,12 @@ namespace HLNews.Controllers
             //ResultsController results = new ResultsController(_config);
 
             ViewData["Countries"] = countryList;
-            NewsEndpoint newsEndpoint = new NewsEndpoint();
-            var articles = newsEndpoint.Get(searchString, country);
+            if (country != null)
+            {
+                ViewData["SelectedCountry"] = country;
+            }
+        
+            var articles = _newsEndpoint.Get(searchString, country);
             return View(articles);
         }
 
